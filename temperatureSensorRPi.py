@@ -14,6 +14,7 @@ import time
 import paho.mqtt.client as mqtt
 
 import raspberry_1wire_therm as therm
+import raspberry_gpio as gpio
 
 def presenceTopic(device):
     return "/presence/{}".format(device)
@@ -45,6 +46,7 @@ class MqttSensor(MqttPresence):
             "type": "temperature",
             "value": therm.read_temperature("28-00000588bf23"),
             "name": "28-00000588bf23",
+            "button": gpio.read_gpio(),
         }
         self.mqttclient.publish(deviceTopic(self.client_id), json.dumps(payload), 1)
 
@@ -74,6 +76,10 @@ class MqttSensor(MqttPresence):
 
 def startClient():
     print("starting client")
+
+
+    gpio.setup_gpio()
+
     cl = mqtt.Client()
 
     cl.connect("dev.openlabs.bth.se", 1883, 60)
