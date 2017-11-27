@@ -8,7 +8,7 @@ from pprint import pprint
 import paho.mqtt.client as mqtt
 
 
-def on_connect(mqttc, obj, returncode):
+def on_connect(mqttc, userdata, obj, returncode):
     """ mqtt library callback on connect """
     mqttc.subscribe("#", 0)
     print("------------------------------------------")
