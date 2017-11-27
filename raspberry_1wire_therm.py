@@ -33,7 +33,7 @@ import time
 
 def osSetup():
     os.system("modprobe w1-gpio")
-    os.system("modprobe w1-gpio")
+    os.system("modprobe w1-therm")
     os.system("dtoverlay w1-gpio gpiopin=4 pullup=0")
 
 
